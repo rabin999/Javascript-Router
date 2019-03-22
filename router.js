@@ -5,7 +5,6 @@
  */
 
 var Route = function(options, cb) {
-
 	for(url in options) {
 		if(options[url].hasOwnProperty('url')) {
 			window.routes 	= this;
@@ -18,7 +17,7 @@ var Route = function(options, cb) {
 	this.currentRoute	= this.currentRoute ? this.currentRoute : null;
 	this.location 		= window.location ? window.location : null;
 	this.eventRef 		= $('*[data-route]');
-	this.container 		= $("#renderPartialPage");
+	this.container 		= $("#pageContainer");
 	this.activeClass 	= 'm-menu__item--expanded';
 
 	/**
@@ -319,7 +318,7 @@ $(document).off('click','*[data-route]').on('click','*[data-route]', function(e)
 	}
 
 	removePrevClass(self);
-	$("#renderPartialPage").append('<div class="m-loader page" rel="pageLoader"></div>');
+	$("#renderPartialPage").append('<div class="m-loader page" rel="pageLoader"><i class="mdi mdi-48px mdi-spin mdi-loading"></i></div>');
 
 	routes.executeRoute(routeName, {
 		url: self.attr('data-route')
@@ -334,7 +333,7 @@ $(document).off('click','*[data-route]').on('click','*[data-route]', function(e)
 
 window.onload = function() {
 
-	$("#renderPartialPage").append('<div class="m-loader page" rel="pageLoader"></div>');
+	$("#renderPartialPage").append('<div class="m-loader page" rel="pageLoader"><i class="mdi mdi-48px mdi-spin mdi-loading"></i></div>');
 
 	var url = window.location.hash.length ? window.location.hash : '';
 	var routeIndex = url.split('#')[1];
@@ -422,6 +421,8 @@ function showError(error) {
 
 	}
 }
+
+
 new Route({
     'web/home': {
         url: 'web/home',
